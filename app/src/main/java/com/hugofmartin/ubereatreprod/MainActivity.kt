@@ -11,6 +11,7 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material.icons.sharp.List
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -95,25 +96,43 @@ fun bigButtonHeader(text: String, iconId: Int) {
 }
 
 @Composable
-fun smallButtonHeader() {
-    Column() {
+fun smallButtonHeader(text: String, iconId: Int?) {
+    Column(
+    ) {
         Box(
             modifier = Modifier
                 .height(74.dp)
                 .width(74.dp)
+                .padding(end = 0.dp)
+                .align(Alignment.CenterHorizontally)
                 .background(Color.LightGray, RoundedCornerShape(5.dp))
         ) {
-            Icon(
-                painterResource(id = R.drawable.course_icon),
-                contentDescription = "",
-                tint = Color.Unspecified,
-                modifier = Modifier
-                    .size(50.dp)
-            )
-        }
-        Text(text = "Hello")
-    }
+            if (iconId != null) {
+                Icon(
+                    painterResource(id = iconId!!),
+                    contentDescription = "",
+                    tint = Color.Unspecified,
+                    modifier = Modifier
+                        .size(50.dp)
+                        .align(Alignment.Center)
+                )
+            } else {
+                Icon(
+                    Icons.Filled.MoreVert,
+                    contentDescription = "",
+                    tint = Color.Unspecified,
+                    modifier = Modifier
+                        .size(50.dp)
+                        .align(Alignment.Center)
+                )
+            }
 
+        }
+        Text(
+            text = text,
+            modifier = Modifier.align(Alignment.CenterHorizontally)
+        )
+    }
 }
 
 @Preview(showBackground = true)
@@ -155,23 +174,33 @@ fun DefaultPreview() {
                     text = "Restaurants",
                     iconId = R.drawable.course_icon
                 )
-                Spacer(modifier = Modifier.width(2.dp))
-
                 bigButtonHeader(
                     text = "Courses",
                     iconId = R.drawable.restaurant_icon
                 )
             }
-            Row( modifier = Modifier
-                .fillMaxWidth()
-                .padding(8.dp),
-                horizontalArrangement = Arrangement.SpaceBetween) {
-                smallButtonHeader()
-                smallButtonHeader()
-                Spacer(modifier = Modifier.width(2.dp))
-
-                smallButtonHeader()
-                smallButtonHeader()
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(8.dp),
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+                smallButtonHeader(
+                    text = "Épicerie",
+                    iconId = R.drawable.epicerie
+                )
+                smallButtonHeader(
+                    text = "Alcool",
+                    iconId = R.drawable.alcool
+                )
+                smallButtonHeader(
+                    text = "Hygiène",
+                    iconId = R.drawable.hygiene
+                )
+                smallButtonHeader(
+                    text = "Tout afficher",
+                    null
+                )
             }
         }
     }
