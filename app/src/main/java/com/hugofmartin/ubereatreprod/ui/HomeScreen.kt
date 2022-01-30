@@ -39,6 +39,7 @@ fun OrderTypeMenuSection(orderType: List<String>, modifier: Modifier) {
     Box(modifier = modifier) {
         LazyRow(
             modifier = Modifier
+                .padding(vertical = 20.dp)
                 .fillMaxWidth()
                 .height(36.dp),
             horizontalArrangement = Arrangement.Center,
@@ -82,13 +83,9 @@ fun HomeScreen() {
     val nestedScrollConnection = remember {
         object : NestedScrollConnection {
             override fun onPreScroll(available: Offset, source: NestedScrollSource): Offset {
-                // try to consume before LazyColumn to collapse toolbar if needed, hence pre-scroll
                 val delta = available.y
                 val newOffset = toolbarOffsetHeightPx.value + delta
                 toolbarOffsetHeightPx.value = newOffset.coerceIn(-toolbarHeightPx, 0f)
-                // here's the catch: let's pretend we consumed 0 in any case, since we want
-                // LazyColumn to scroll anyway for good UX
-                // We're basically watching scroll without taking it
                 return Offset.Zero
             }
         }

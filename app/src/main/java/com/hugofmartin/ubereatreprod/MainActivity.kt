@@ -16,26 +16,10 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-
         setContent {
             HomeScreen()
-//            UberEatReprodTheme {
-//
-//            }
         }
     }
-
-
-
-
-    @Preview(showBackground = true)
-    @Composable
-    fun DefaultPreview() {
-        UberEatReprodTheme {
-           HomeScreen()
-        }
-    }
-
 }
 
 
